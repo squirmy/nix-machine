@@ -46,24 +46,32 @@ in {
 
   imports = [./configuration];
 
-  config = {
+  config = let
+    specialArgs = import ./lib/special-args.nix {inherit inputs;};
+  in {
     flake = {
       darwinConfigurations =
         builtins.mapAttrs (
-          _machineName: machineConfig: (inputs.nix-darwin.lib.darwinSystem {
+          _machineName: machineConfiguration: (inputs.nix-darwin.lib.darwinSystem {
             # allow nix-darwin modules to access inputs
-            specialArgs = import ./lib/special-args.nix {inherit inputs;};
+            inherit specialArgs;
 
             # nix-darwin configuration
             modules = [
               inputs.home-manager.darwinModules.home-manager
               {
-                home-manager.users.${machineConfig.nix-machine.username} = {
-                  imports = [homeManagerConfiguration machineConfig];
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+
+                # allow home-manager modules to access inputs
+                home-manager.extraSpecialArgs = specialArgs;
+
+                home-manager.users.${machineConfiguration.nix-machine.username} = {
+                  imports = [homeManagerConfiguration machineConfiguration];
                 };
               }
               nixDarwinConfiguration
-              machineConfig
+              machineConfiguration
             ];
           })
         )
