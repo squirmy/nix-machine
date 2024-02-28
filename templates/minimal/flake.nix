@@ -27,6 +27,8 @@
         # https://daiderd.com/nix-darwin/manual/index.html
         nixDarwin = {...}: {
           security.pam.enableSudoTouchIdAuth = true;
+
+          programs.zsh.enable = true;
         };
 
         # configuration to apply to home-manager
@@ -35,6 +37,8 @@
           home.packages = [
             pkgs.fortune
           ];
+
+          programs.zsh.enable = true;
         };
       };
     };

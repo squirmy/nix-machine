@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: 
+          - macos-latest
+        template:
+          - templates/minimal
+          # - templates/private-configuration
+          # - templates/expose-configuration
+    runs-on: ${{ matrix.os }}
+    env:
+      NIX_CONFIG: extra-access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Build ${{ matrix.template }}
+        shell: zsh {0}
+        run: |
+          cd ${{ matrix.template }}
+
+          # Substitute in the build runner's configuration.
+          nix run nixpkgs#sd 'username = "username"' 'username = "runner"' flake.nix
+          nix run nixpkgs#sd 'homeDirectory = "/Users/username"' 'homeDirectory = "/Users/runner"' flake.nix
+          nix run nixpkgs#sd 'nixpkgs.hostPlatform = "aarch64-darwin"' 'nixpkgs.hostPlatform = "x86_64-darwin"' flake.nix
+
+          sudo -i mv /etc/nix/nix.conf /etc/nix/nix.conf.before-nix-darwin
+
+          nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake .#hostname
+
+          source /etc/zshenv
+
+          fortune

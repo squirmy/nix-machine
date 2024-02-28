@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+shopt -s nullglob
+
 plutil="/usr/bin/plutil"
 killall="/usr/bin/killall"
 osacompile="/usr/bin/osacompile"
