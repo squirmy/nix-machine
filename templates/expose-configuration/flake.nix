@@ -12,7 +12,10 @@
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["aarch64-darwin" "x86_64-darwin"];
-      imports = [inputs.nix-machine.flakeModule];
+      imports = [
+        inputs.nix-machine.flakeModule
+        ./configuration
+      ];
 
       nix-machine.macos."hostname" = {
         nix-machine = {
@@ -22,20 +25,8 @@
         };
       };
 
-      nix-machine.configurations.private = {
-        # configuration to apply to nix-darwin
-        # https://daiderd.com/nix-darwin/manual/index.html
-        nixDarwin = {...}: {
-          security.pam.enableSudoTouchIdAuth = true;
-        };
-
-        # configuration to apply to home-manager
-        # https://mipmip.github.io/home-manager-option-search/
-        homeManager = {pkgs, ...}: {
-          home.packages = [
-            pkgs.fortune
-          ];
-        };
+      flake = {
+        flakeModule = ./configuration;
       };
     };
 }
