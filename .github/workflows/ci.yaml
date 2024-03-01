@@ -14,8 +14,8 @@ jobs:
           - macos-latest
         template:
           - templates/minimal
-          # - templates/private-configuration
-          # - templates/expose-configuration
+          - templates/private-configuration
+          - templates/expose-configuration
     runs-on: ${{ matrix.os }}
     env:
       NIX_CONFIG: extra-access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
@@ -37,7 +37,7 @@ jobs:
           sudo -i mv /etc/nix/nix.conf /etc/nix/nix.conf.before-nix-darwin
           sudo -i mv /etc/shells /etc/shells.before-nix-darwin
           
-          nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake .#hostname
+          nix run nix-darwin --extra-experimental-features "nix-command flakes" -- build --flake .#hostname
 
           source /etc/zshenv
 
