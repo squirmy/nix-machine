@@ -3,7 +3,7 @@
   config,
   ...
 }: {
-  imports = [./trampoline];
+  imports = [./trampoline ./zsh.nix];
 
   # It is occasionally necessary for Home Manager to change configuration
   # defaults in a way that is incompatible with stateful data.
