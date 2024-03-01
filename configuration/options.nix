@@ -1,4 +1,8 @@
 {lib, ...}: let
+  shellsOptions = {
+    zsh.enable = lib.options.mkEnableOption "zsh";
+  };
+
   configurationOptions = {
     nixpkgs.hostPlatform = lib.mkOption {
       type = lib.types.str;
@@ -21,6 +25,10 @@
     };
     homeDirectory = lib.mkOption {
       type = lib.types.str;
+    };
+    shells = lib.mkOption {
+      type = lib.types.submodule {options = shellsOptions;};
+      default = {};
     };
   };
 in {

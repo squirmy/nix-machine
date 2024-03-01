@@ -29,12 +29,14 @@ jobs:
           cd ${{ matrix.template }}
 
           # Substitute in the build runner's configuration.
+          nix run nixpkgs#sd 'nix-machine.url = "github:squirmy/nix-machine"' 'nix-machine.url = "github:squirmy/nix-machine/${{ github.sha }}"' flake.nix
           nix run nixpkgs#sd 'username = "username"' 'username = "runner"' flake.nix
           nix run nixpkgs#sd 'homeDirectory = "/Users/username"' 'homeDirectory = "/Users/runner"' flake.nix
           nix run nixpkgs#sd 'nixpkgs.hostPlatform = "aarch64-darwin"' 'nixpkgs.hostPlatform = "x86_64-darwin"' flake.nix
 
           sudo -i mv /etc/nix/nix.conf /etc/nix/nix.conf.before-nix-darwin
-
+          sudo -i mv /etc/shells /etc/shells.before-nix-darwin
+          
           nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake .#hostname
 
           source /etc/zshenv
