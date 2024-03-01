@@ -4,7 +4,7 @@
     macos.enable = lib.options.mkEnableOption "macos";
   };
 in {
-  options.squirmy = lib.mkOption {
+  options.mine = lib.mkOption {
     type = lib.types.submodule {options = configurationOptions;};
     default = {};
   };

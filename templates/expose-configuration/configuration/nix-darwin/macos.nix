@@ -3,6 +3,6 @@
   config,
   ...
 }:
-lib.mkIf config.squirmy.macos.enable {
+lib.mkIf config.mine.macos.enable {
   security.pam.enableSudoTouchIdAuth = true;
 }
