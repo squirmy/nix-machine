@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-lib.mkIf config.squirmy.fortune.enable {
+lib.mkIf config.mine.fortune.enable {
   home.packages = [
     pkgs.fortune
   ];

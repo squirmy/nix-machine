@@ -22,6 +22,12 @@
           username = "username";
           homeDirectory = "/Users/username";
           nixpkgs.hostPlatform = "aarch64-darwin";
+          shells.zsh.enable = true;
+        };
+
+        mine = {
+          fortune.enable = true;
+          macos.enable = true;
         };
       };
 

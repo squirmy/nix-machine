@@ -14,8 +14,8 @@ jobs:
           - macos-latest
         template:
           - templates/minimal
-          # - templates/private-configuration
-          # - templates/expose-configuration
+          - templates/private-configuration
+          - templates/expose-configuration
     runs-on: ${{ matrix.os }}
     env:
       NIX_CONFIG: extra-access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
