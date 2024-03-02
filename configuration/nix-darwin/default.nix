@@ -1,4 +1,5 @@
 {
+  lib,
   config,
   pkgs,
   ...
@@ -12,5 +13,6 @@
     home = config.nix-machine.homeDirectory;
   };
 
-  environment.shells = [pkgs.bashInteractive];
+  # Always include bash in /etc/shells if nix-machine is being used to enable shells
+  environment.shells = lib.mkIf config.nix-machine.shells.zsh.enable [pkgs.bashInteractive];
 }
