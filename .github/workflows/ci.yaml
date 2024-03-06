@@ -14,7 +14,7 @@ jobs:
           - macos-latest
         template:
           - templates/minimal
-          - templates/private-configuration
+          - templates/simple-macos
           - templates/expose-configuration
     runs-on: ${{ matrix.os }}
     env:
