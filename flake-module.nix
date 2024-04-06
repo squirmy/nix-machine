@@ -6,7 +6,9 @@
 }: let
   cfg = config.nix-machine;
 
-  configurations = map (x: x.value) (lib.attrsets.attrsToList cfg.configurations);
+  parseConfig = import ./lib/parse-config.nix {inherit lib;};
+
+  configurations = map (x: x.value) (lib.attrsets.attrsToList (parseConfig cfg.configurations));
 
   sharedOptions = lib.catAttrs "options" configurations;
   nixDarwinConfigurations = lib.catAttrs "nixDarwin" configurations;
@@ -29,6 +31,14 @@
     homeManager = lib.mkOption {
       type = lib.types.deferredModule;
       default = {};
+    };
+    path = lib.mkOption {
+      type = lib.types.nullOr lib.types.path;
+      default = null;
+    };
+    scheme = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
     };
   };
 in {
