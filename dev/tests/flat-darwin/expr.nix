@@ -16,7 +16,7 @@
   };
 
   eval = lib.evalModules {
-    modules = [testOptions] ++ config.nixDarwin;
+    modules = [testOptions] ++ config.darwin;
   };
 in {
   inherit (eval) options config;

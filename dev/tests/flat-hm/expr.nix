@@ -15,10 +15,8 @@
     };
   };
 
-  inherit (config) homeManager;
-
   eval = lib.evalModules {
-    modules = [testOptions] ++ homeManager;
+    modules = [testOptions] ++ config.home;
   };
 in {
   inherit (eval) options config;

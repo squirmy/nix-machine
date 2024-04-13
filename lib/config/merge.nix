@@ -13,11 +13,12 @@
   #   To: { x = [1 4]; y = [2 5]; z = [3 6] }
   combine = c: zipAttrsWith (name: values: flatten values) (mapAttrsToList (name: value: value) c);
 
+  # todo; optionally apply the options in resolve to allow resolve to be used independently
   # Allow the options to be used in both nix-darwin and home-manager modules.
   applyOptions = combined: {
     options = combined.options;
-    nixDarwin = combined.options ++ combined.nixDarwin;
-    homeManager = combined.options ++ combined.homeManager;
+    darwin = combined.options ++ combined.darwin;
+    home = combined.options ++ combined.home;
   };
 in
   configurations:

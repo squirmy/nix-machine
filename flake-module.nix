@@ -67,11 +67,11 @@ in {
                   home-manager.extraSpecialArgs = specialArgs;
 
                   home-manager.users.${machineConfiguration.nix-machine.username} = {
-                    imports = mergedConfig.homeManager ++ [machineConfiguration];
+                    imports = mergedConfig.home ++ [machineConfiguration];
                   };
                 }
               ]
-              ++ mergedConfig.nixDarwin
+              ++ mergedConfig.darwin
               ++ [machineConfiguration];
           })
         )
