@@ -10,16 +10,16 @@
 
   configurationOptions = {
     options = lib.mkOption {
-      type = lib.types.deferredModule;
-      default = {};
+      type = lib.types.listOf lib.types.deferredModule;
+      default = [];
     };
     darwin = lib.mkOption {
-      type = lib.types.deferredModule;
-      default = {};
+      type = lib.types.listOf lib.types.deferredModule;
+      default = [];
     };
     home = lib.mkOption {
-      type = lib.types.deferredModule;
-      default = {};
+      type = lib.types.listOf lib.types.deferredModule;
+      default = [];
     };
     path = lib.mkOption {
       type = lib.types.nullOr lib.types.path;

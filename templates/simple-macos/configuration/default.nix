@@ -1,6 +1,6 @@
 {...}: {
   nix-machine.configurations.private = {
-    darwin = ./nix-darwin;
-    home = ./home-manager;
+    darwin = [./nix-darwin];
+    home = [./home-manager];
   };
 }
