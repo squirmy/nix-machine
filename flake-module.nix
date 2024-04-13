@@ -1,7 +1,10 @@
-{flakeLib}: {
+{
+  lib,
+  flakeLib,
+  ...
+}: {
   inputs,
   config,
-  lib,
   ...
 }: let
   cfg = config.nix-machine;

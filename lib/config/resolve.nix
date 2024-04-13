@@ -1,9 +1,13 @@
-{lib, ...}: c: let
+{
+  lib,
+  flakeLib,
+  ...
+}: c: let
   inherit (lib.trivial) pipe;
 
   resolveProvided = c: c;
-  resolveFlat = c: import ./resolve-flat.nix {inherit lib;} c.path;
-  resolveByName = c: import ./resolve-by-name.nix {inherit lib;} c.path;
+  resolveFlat = c: flakeLib.config.resolveFlat c.path;
+  resolveByName = c: flakeLib.config.resolveByName c.path;
 
   resolver =
     if c.path != null && c.scheme == "flat"

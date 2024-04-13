@@ -4,15 +4,24 @@
   };
 
   outputs = inputs: let
+    # Use dependency injection instead of importing the
+    # lib function files directly
+    init = path: (import path {
+      lib = inputs.nixpkgs.lib;
+      flakeLib = lib;
+    });
+
     lib = {
-      config.merge = import ./lib/config/merge.nix {inherit (inputs.nixpkgs) lib;};
-      config.resolve = import ./lib/config/resolve.nix {inherit (inputs.nixpkgs) lib;};
-      systems.darwin = import ./lib/systems/darwin.nix;
+      config.merge = init ./lib/config/merge.nix;
+      config.resolve = init ./lib/config/resolve.nix;
+      config.resolveFlat = init ./lib/config/resolve-flat.nix;
+      config.resolveByName = init ./lib/config/resolve-by-name.nix;
+      systems.darwin = init ./lib/systems/darwin.nix;
     };
   in {
-    flakeModule = import ./flake-module.nix {flakeLib = lib;};
+    flakeModule = init ./flake-module.nix;
 
-    inherit lib;
+    lib = lib;
 
     templates = {
       minimal = {
