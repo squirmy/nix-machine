@@ -42,6 +42,7 @@
           packages = [
             inputs'.namaka.packages.default
           ];
+          motd = "";
         };
       };
     };
