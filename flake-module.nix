@@ -13,11 +13,11 @@
       type = lib.types.deferredModule;
       default = {};
     };
-    nixDarwin = lib.mkOption {
+    darwin = lib.mkOption {
       type = lib.types.deferredModule;
       default = {};
     };
-    homeManager = lib.mkOption {
+    home = lib.mkOption {
       type = lib.types.deferredModule;
       default = {};
     };

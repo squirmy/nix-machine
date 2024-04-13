@@ -26,13 +26,13 @@
       nix-machine.configurations.private = {
         # configuration to apply to nix-darwin
         # https://daiderd.com/nix-darwin/manual/index.html
-        nixDarwin = {...}: {
+        darwin = {...}: {
           security.pam.enableSudoTouchIdAuth = true;
         };
 
         # configuration to apply to home-manager
         # https://mipmip.github.io/home-manager-option-search/
-        homeManager = {pkgs, ...}: {
+        home = {pkgs, ...}: {
           home.packages = [
             pkgs.fortune
           ];
