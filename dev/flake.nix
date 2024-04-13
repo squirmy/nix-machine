@@ -4,8 +4,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     namaka.url = "github:nix-community/namaka/v0.2.0";
     namaka.inputs.nixpkgs.follows = "nixpkgs";
-    haumea.url = "github:nix-community/haumea/v0.2.2";
-    haumea.inputs.nixpkgs.follows = "nixpkgs";
+    call-flake.url = "github:divnix/call-flake";
 
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
@@ -16,13 +15,8 @@
       flake.checks = inputs.namaka.lib.load {
         src = ./tests;
         inputs = {
-          flakeLib = inputs.haumea.lib.load {
-            src = ../lib;
-            inputs = {
-              inherit (inputs.nixpkgs) lib;
-            };
-          };
           inherit (inputs.nixpkgs) lib;
+          flakeLib = (inputs.call-flake ../.).lib;
         };
       };
 

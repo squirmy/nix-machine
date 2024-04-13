@@ -1,6 +1,18 @@
 {
-  outputs = inputs: {
-    flakeModule = ./flake-module.nix;
+  inputs = {
+    nixpkgs.url = "github:nix-community/nixpkgs.lib";
+  };
+
+  outputs = inputs: let
+    lib = {
+      config.merge = import ./lib/config/merge.nix {inherit (inputs.nixpkgs) lib;};
+      config.resolve = import ./lib/config/resolve.nix {inherit (inputs.nixpkgs) lib;};
+      systems.darwin = import ./lib/systems/darwin.nix;
+    };
+  in {
+    flakeModule = import ./flake-module.nix {flakeLib = lib;};
+
+    inherit lib;
 
     templates = {
       minimal = {
