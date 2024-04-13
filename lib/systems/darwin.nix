@@ -1,7 +1,7 @@
 {inputs}: {
   modules,
   machineConfig,
-  machineName,
+  ...
 }: (inputs.nix-darwin.lib.darwinSystem {
   # allow nix-darwin modules to access inputs
   specialArgs = {inherit inputs;};

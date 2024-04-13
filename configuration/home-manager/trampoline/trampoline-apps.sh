@@ -49,7 +49,7 @@ function copy_paths() {
   temp_dir=$(mktemp -d)
   trap 'rm -rf "$temp_dir"' EXIT
 
-  pushd "$temp_dir" > /dev/null || exit
+  pushd "$temp_dir" >/dev/null || exit
 
   cp "$from" "orig"
   chmod u+w "orig"
@@ -59,12 +59,12 @@ function copy_paths() {
 
   $plutil -convert json -- "orig"
   $plutil -convert json -- "bare-wrapper"
-  jq --argjson keys "$keys" "$jqfilter" < "orig" > "filtered"
-  cat "bare-wrapper" "filtered" | jq -s add > "final"
+  jq --argjson keys "$keys" "$jqfilter" <"orig" >"filtered"
+  cat "bare-wrapper" "filtered" | jq -s add >"final"
   $plutil -convert xml1 -- "final"
 
   cp "final" "$to"
-  popd > /dev/null || exit
+  popd >/dev/null || exit
 }
 
 function sync_dock() {

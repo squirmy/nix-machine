@@ -6,8 +6,10 @@
     namaka.inputs.nixpkgs.follows = "nixpkgs";
     call-flake.url = "github:divnix/call-flake";
 
-    devshell.url = "github:numtide/devshell";
-    devshell.inputs.nixpkgs.follows = "nixpkgs";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
+    pre-commit-hooks-nix.url = "github:cachix/pre-commit-hooks.nix";
+    pre-commit-hooks-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs:
@@ -28,15 +30,60 @@
       ];
 
       imports = [
-        inputs.devshell.flakeModule
+        inputs.treefmt-nix.flakeModule
+        inputs.pre-commit-hooks-nix.flakeModule
       ];
 
-      perSystem = {inputs', ...}: {
-        devshells.default = {
-          packages = [
-            inputs'.namaka.packages.default
+      perSystem = {
+        inputs',
+        config,
+        pkgs,
+        ...
+      }: {
+        treefmt.config = {
+          projectRoot = ./..;
+          projectRootFile = "readme.md";
+          package = pkgs.treefmt;
+          flakeCheck = false;
+
+          programs = {
+            alejandra.enable = true;
+            deadnix.enable = true;
+            shfmt.enable = true;
+            prettier.enable = true;
+            taplo.enable = true;
+          };
+        };
+
+        pre-commit = {
+          check.enable = false;
+          settings.hooks = {
+            treefmt.enable = true;
+            shellcheck.enable = true;
+            gitleaks = {
+              enable = true;
+              name = "gitleaks";
+              entry = "${pkgs.gitleaks}/bin/gitleaks protect --verbose --redact --staged";
+              language = "system";
+              pass_filenames = false;
+            };
+          };
+        };
+
+        formatter = config.treefmt.build.wrapper;
+
+        # todo; work out a way to not pollute the env with unnecessary variables
+        devShells.default = pkgs.mkShell {
+          inputsFrom = [
+            config.treefmt.build.devShell
           ];
-          motd = "";
+          packages = with pkgs; [
+            inputs'.namaka.packages.default
+            just
+          ];
+          shellHook = ''
+            ${config.pre-commit.installationScript}
+          '';
         };
       };
     };
