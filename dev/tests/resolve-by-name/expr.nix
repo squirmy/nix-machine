@@ -3,7 +3,7 @@
   flakeLib,
 }: let
   config = flakeLib.config.resolve {
-    path = ../_fixture/by-name-config;
+    path = ../_fixture/first/by-name-config;
     scheme = "by-name";
   };
 

@@ -3,7 +3,7 @@
   flakeLib,
 }: let
   config = flakeLib.config.resolve {
-    path = ../_fixture/flat-config;
+    path = ../_fixture/first/flat-config;
     scheme = "flat";
   };
 

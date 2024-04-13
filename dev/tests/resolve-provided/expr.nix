@@ -3,9 +3,9 @@
   flakeLib,
 }: let
   config = flakeLib.config.resolve {
-    options = [../_fixture/provided-config/options.nix];
-    darwin = [../_fixture/provided-config/nix-darwin.nix];
-    home = [../_fixture/provided-config/home-manager.nix];
+    options = [../_fixture/first/provided-config/options.nix];
+    darwin = [../_fixture/first/provided-config/nix-darwin.nix];
+    home = [../_fixture/first/provided-config/home-manager.nix];
     path = null;
   };
 
