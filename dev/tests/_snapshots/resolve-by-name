@@ -1,0 +1,2 @@
+#json
+{"darwin":{"config":{"aaa":false,"aab":false,"bba":false,"names":"darwin-bba\ndarwin-aaa"},"options":{"_module":{"args":"_module.args","check":"_module.check","freeformType":"_module.freeformType","specialArgs":"_module.specialArgs"},"aaa":"aaa","aab":"aab","bba":"bba","names":"names"}},"home":{"config":{"aaa":false,"aab":false,"bba":false,"names":"hm-bba\nhm-aab"},"options":{"_module":{"args":"_module.args","check":"_module.check","freeformType":"_module.freeformType","specialArgs":"_module.specialArgs"},"aaa":"aaa","aab":"aab","bba":"bba","names":"names"}}}
