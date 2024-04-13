@@ -2,7 +2,7 @@
   lib,
   flakeLib,
 }: let
-  config = flakeLib.merge-config.default {
+  config = flakeLib.config.merge {
     squirmy = {
       path = ../_fixture/flat-config;
       scheme = "flat";

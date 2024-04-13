@@ -3,16 +3,7 @@
   inherit (lib.lists) flatten;
   inherit (lib.trivial) pipe;
 
-  resolve = c: let
-    resolveProvided = c: c;
-    resolveFlat = c: import ./resolve-flat.nix {inherit lib;} c.path;
-
-    resolver =
-      if c.path != null && c.scheme == "flat"
-      then resolveFlat
-      else resolveProvided;
-  in
-    resolver c;
+  resolve = c: import ./resolve.nix {inherit lib;} c;
 
   # builtins.mapAttrs: Apply function f to every element of attrset.
   resolveAll = configurations: builtins.mapAttrs (name: value: resolve value) configurations;

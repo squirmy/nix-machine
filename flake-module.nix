@@ -6,7 +6,7 @@
 }: let
   cfg = config.nix-machine;
 
-  mergedConfig = import ./lib/merge-config {inherit lib;} cfg.configurations;
+  mergedConfig = import ./lib/config/merge.nix {inherit lib;} cfg.configurations;
 
   configurationOptions = {
     options = lib.mkOption {

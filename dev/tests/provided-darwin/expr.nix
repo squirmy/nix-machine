@@ -2,7 +2,7 @@
   lib,
   flakeLib,
 }: let
-  config = flakeLib.merge-config.default {
+  config = flakeLib.config.merge {
     squirmy = {
       options = ../_fixture/provided-config/options.nix;
       nixDarwin = ../_fixture/provided-config/nix-darwin.nix;
