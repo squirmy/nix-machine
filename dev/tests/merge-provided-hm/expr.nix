@@ -4,9 +4,9 @@
 }: let
   config = flakeLib.config.merge {
     squirmy = {
-      options = ../_fixture/provided-config/options.nix;
-      darwin = ../_fixture/provided-config/nix-darwin.nix;
-      home = ../_fixture/provided-config/home-manager.nix;
+      options = [../_fixture/provided-config/options.nix];
+      darwin = [../_fixture/provided-config/nix-darwin.nix];
+      home = [../_fixture/provided-config/home-manager.nix];
       path = null;
     };
   };

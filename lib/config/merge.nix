@@ -12,18 +12,9 @@
   # From: { a = { x = 1; y = 2; z = 3; }; b = { x = 4; y = 5; z = 6; }; }
   #   To: { x = [1 4]; y = [2 5]; z = [3 6] }
   combine = c: zipAttrsWith (name: values: flatten values) (mapAttrsToList (name: value: value) c);
-
-  # todo; optionally apply the options in resolve to allow resolve to be used independently
-  # Allow the options to be used in both nix-darwin and home-manager modules.
-  applyOptions = combined: {
-    options = combined.options;
-    darwin = combined.options ++ combined.darwin;
-    home = combined.options ++ combined.home;
-  };
 in
   configurations:
     pipe configurations [
       resolveAll
       combine
-      applyOptions
     ]
