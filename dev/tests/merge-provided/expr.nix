@@ -17,9 +17,17 @@
     };
   };
 
-  eval = lib.evalModules {
+  evalDarwin = lib.evalModules {
     modules = [testOptions] ++ config.darwin;
   };
+  evalHome = lib.evalModules {
+    modules = [testOptions] ++ config.home;
+  };
 in {
-  inherit (eval) options config;
+  darwin = {
+    inherit (evalDarwin) options config;
+  };
+  home = {
+    inherit (evalHome) options config;
+  };
 }
