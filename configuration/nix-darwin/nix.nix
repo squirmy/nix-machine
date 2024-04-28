@@ -16,7 +16,7 @@
   # The following settings are taken from https://github.com/DeterminateSystems/nix-installer
   nix.settings = {
     build-users-group = lib.mkDefault "nixbld";
-    experimental-features = lib.mkDefault "nix-command flakes repl-flake";
+    experimental-features = lib.mkDefault "nix-command flakes";
     # https://github.com/NixOS/nix/issues/7273
     auto-optimise-store = lib.mkDefault false;
     bash-prompt-prefix = lib.mkDefault "(nix:$name)\040";
