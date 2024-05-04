@@ -7,7 +7,7 @@
   # nix-darwin switches from the initially installed nix version to
   # a version that it places it in the store. This uses the latest
   # version from unstable.
-  nix.package = lib.mkDefault pkgs.nixUnstable;
+  nix.package = lib.mkDefault pkgs.nixVersions.latest;
 
   # Use the already fetched nixpkgs when referring to nixpkgs outside of a flake
   nix.nixPath = lib.mkDefault ["nixpkgs=${inputs.nixpkgs}"];
