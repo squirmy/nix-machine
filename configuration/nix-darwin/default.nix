@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  imports = [./nix.nix ./nixpkgs.nix ./zsh.nix];
+  imports = [./nix.nix ./nixpkgs.nix ./nh.nix ./zsh.nix];
 
   # Set the user's name & home directory. This should be
   # in sync with home manager.
@@ -15,4 +15,8 @@
 
   # Always include bash in /etc/shells if nix-machine is being used to enable shells
   environment.shells = lib.mkIf config.nix-machine.shells.zsh.enable [pkgs.bashInteractive];
+
+  # Used for backwards compatibility, please read the changelog before changing.
+  # $ darwin-rebuild changelog
+  system.stateVersion = 4;
 }

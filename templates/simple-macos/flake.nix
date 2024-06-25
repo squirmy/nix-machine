@@ -8,6 +8,7 @@
     nix-machine.url = "github:squirmy/nix-machine";
     nix-machine.inputs.nixpkgs.follows = "nixpkgs";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    nh-darwin.url = "github:ToyVo/nh-darwin";
   };
 
   outputs = inputs:

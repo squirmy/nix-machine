@@ -12,10 +12,9 @@
   modules = flakeLib.config.merge cfg.configurations;
   darwinSystem = flakeLib.systems.darwin {inherit inputs;};
 
-  asDarwinConfiguration = machineName: machineConfig: (darwinSystem {
+  asDarwinConfiguration = _machineName: machineConfig: (darwinSystem {
     inherit modules;
     inherit machineConfig;
-    inherit machineName;
   });
 
   configurationOptions = {
@@ -54,6 +53,10 @@ in {
   };
 
   imports = [./configuration];
+
+  config.flake.nix-machine.lib = {
+    mkDarwinMachine = asDarwinConfiguration "_";
+  };
 
   config.flake.darwinConfigurations = builtins.mapAttrs asDarwinConfiguration cfg.macos;
 }
