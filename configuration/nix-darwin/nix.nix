@@ -26,8 +26,8 @@
     extra-nix-path = lib.mkDefault "nixpkgs=flake:nixpkgs";
 
     # Additional settings
-    flake-registry = builtins.toFile "global-registry.json" ''{"flakes":[],"version":2}'';
-    trusted-users = ["root" config.nix-machine.username];
+    flake-registry = lib.mkDefault (builtins.toFile "global-registry.json" ''{"flakes":[],"version":2}'');
+    trusted-users = lib.mkDefault ["root" config.nix-machine.username];
   };
 
   # Enable nix-daemon to support multi-user mode nix.
