@@ -12,7 +12,6 @@
 
   # Use the already fetched nixpkgs when referring to nixpkgs outside of a flake
   nix.nixPath = lib.mkDefault ["nixpkgs=${inputs.nixpkgs}"];
-  nix.registry.nixpkgs.flake = lib.mkDefault inputs.nixpkgs;
 
   nix.settings = {
     # The following settings are taken from https://github.com/DeterminateSystems/nix-installer
