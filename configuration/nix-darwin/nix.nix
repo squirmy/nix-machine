@@ -2,7 +2,6 @@
   lib,
   pkgs,
   inputs,
-  config,
   ...
 }: {
   # nix-darwin switches from the initially installed nix version to
@@ -17,8 +16,6 @@
     # The following settings are taken from https://github.com/DeterminateSystems/nix-installer
     build-users-group = lib.mkDefault "nixbld";
     experimental-features = lib.mkDefault "nix-command flakes";
-    # https://github.com/NixOS/nix/issues/7273
-    auto-optimise-store = lib.mkDefault false;
     always-allow-substitutes = lib.mkDefault true;
     bash-prompt-prefix = lib.mkDefault "(nix:$name)\040";
     max-jobs = lib.mkDefault "auto";
@@ -26,8 +23,17 @@
 
     # Additional settings
     flake-registry = lib.mkDefault (builtins.toFile "global-registry.json" ''{"flakes":[],"version":2}'');
-    trusted-users = lib.mkDefault ["root" config.nix-machine.username];
+
+    # https://github.com/NixOS/nix/issues/7273
+    auto-optimise-store = lib.mkDefault false;
   };
+
+  nix.extraOptions = ''
+    accept-flake-config = true
+  '';
+
+  # set up a launchd service to optimize the store
+  nix.optimise.automatic = true;
 
   # Enable nix-daemon to support multi-user mode nix.
   # This is the recommended nix installation option.
