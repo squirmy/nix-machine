@@ -26,6 +26,9 @@
 
     # https://github.com/NixOS/nix/issues/7273
     auto-optimise-store = lib.mkDefault false;
+
+    trusted-substituters = ["https://nix-community.cachix.org"];
+    trusted-public-keys = ["nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="];
   };
 
   nix.extraOptions = ''
