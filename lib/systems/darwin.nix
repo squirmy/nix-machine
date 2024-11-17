@@ -21,7 +21,6 @@
           imports = modules.home ++ [machineConfig];
         };
       }
-      inputs.nh-darwin.nixDarwinModules.prebuiltin
     ]
     ++ modules.darwin
     ++ [machineConfig];
