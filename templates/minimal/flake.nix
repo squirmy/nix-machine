@@ -29,7 +29,7 @@
         # https://daiderd.com/nix-darwin/manual/index.html
         darwin = [
           ({...}: {
-            security.pam.enableSudoTouchIdAuth = true;
+            security.pam.services.sudo_local.touchIdAuth = true;
           })
         ];
 

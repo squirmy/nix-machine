@@ -37,8 +37,4 @@
 
   # set up a launchd service to optimize the store
   nix.optimise.automatic = true;
-
-  # Enable nix-daemon to support multi-user mode nix.
-  # This is the recommended nix installation option.
-  services.nix-daemon.enable = lib.mkDefault true;
 }
