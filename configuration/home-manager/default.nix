@@ -15,5 +15,5 @@
   # Set the username & home directory. This should be
   # in sync with nix-darwin.
   home.username = config.nix-machine.username;
-  home.homeDirectory = config.nix-machine.homeDirectory;
+  home.homeDirectory = lib.mkForce config.nix-machine.homeDirectory;
 }

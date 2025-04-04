@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: {
-  imports = [./nix.nix ./nixpkgs.nix ./zsh.nix];
+  imports = [./nix.nix ./zsh.nix];
 
   # Set the user's name & home directory. This should be
   # in sync with home manager.

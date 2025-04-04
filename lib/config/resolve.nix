@@ -19,6 +19,7 @@
   # Allow the options to be used in both nix-darwin and home-manager modules.
   applyOptions = c: {
     options = c.options;
+    nixos = c.options ++ c.nixos;
     darwin = c.options ++ c.darwin;
     home = c.options ++ c.home;
   };

@@ -16,6 +16,7 @@
 in
   path: {
     options = enumerateModules path "options";
+    nixos = enumerateModules path "nixos-module";
     darwin = enumerateModules path "darwin-module";
     home = enumerateModules path "hm-module";
   }

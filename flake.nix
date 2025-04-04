@@ -17,6 +17,7 @@
       config.resolveFlat = init ./lib/config/resolve-flat.nix;
       config.resolveByName = init ./lib/config/resolve-by-name.nix;
       systems.darwin = init ./lib/systems/darwin.nix;
+      systems.linux = init ./lib/systems/linux.nix;
     };
   in {
     flakeModule = init ./flake-module.nix;
